@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Meme Generator                                Secret phrase: routes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #meme-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #meme-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        #meme-title {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #555;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Meme Generator</h1>
+    <button onclick="generateMeme()">Get a Meme</button>
+    <div id="meme-container" style="display: none;">
+        <img id="meme-img" src="" alt="Your meme will appear here!">
+        <p id="meme-title"></p>
+    </div>
+
+    <script>
+        function generateMeme() {
+            fetch('https://meme-api.com/gimme')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('meme-img').src = data.url;
+                    document.getElementById('meme-title').textContent = data.title;
+                    document.getElementById('meme-container').style.display = 'block';
+                })
+                .catch(error => console.error('Error fetching meme:', error));
+        }
+    </script>
+</body>
+</html>
